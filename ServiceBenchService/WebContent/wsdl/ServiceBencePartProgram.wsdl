@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://DefaultNamespace" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://DefaultNamespace" xmlns:intf="http://DefaultNamespace" xmlns:tns1="http://cancel" xmlns:tns2="http://invoice" xmlns:tns3="http://create" xmlns:tns4="http://OrderStatus" xmlns:tns5="http://returnpart" xmlns:tns6="http://search" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://DefaultNamespace" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://OrderStatus"/>
+   <import namespace="http://cancel"/>
+   <import namespace="http://returnpart"/>
+   <import namespace="http://invoice"/>
+   <import namespace="http://search"/>
+   <import namespace="http://create"/>
+   <element name="cancelOrder">
+    <complexType>
+     <sequence>
+      <element name="cancelOrder" type="tns1:CancelOrder"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="cancelOrderResponse">
+    <complexType>
+     <sequence>
+      <element name="cancelOrderReturn" type="tns1:CancelResponse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="invoiceDetails">
+    <complexType>
+     <sequence>
+      <element name="invoiceRequest" type="tns2:InvoiceRequest"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="invoiceDetailsResponse">
+    <complexType>
+     <sequence>
+      <element name="invoiceDetailsReturn" type="tns2:InvoiceResponse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_tns2_PartData">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns2:PartData"/>
+    </sequence>
+   </complexType>
+   <element name="createOrder">
+    <complexType>
+     <sequence>
+      <element name="placeOrder" type="tns3:PlaceOrder"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_tns3_PartData">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns3:PartData"/>
+    </sequence>
+   </complexType>
+   <element name="createOrderResponse">
+    <complexType>
+     <sequence>
+      <element name="createOrderReturn" type="tns3:PlaceOrderResponse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="orderStatus">
+    <complexType>
+     <sequence>
+      <element name="orderStatusRequest" type="tns4:OrderStatusRequest"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="orderStatusResponse">
+    <complexType>
+     <sequence>
+      <element name="orderStatusReturn" type="tns4:OrderStatusResponse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_tns4_PartData">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns4:PartData"/>
+    </sequence>
+   </complexType>
+   <element name="returnPart">
+    <complexType>
+     <sequence>
+      <element name="returnRequest" type="tns5:ReturnRequest"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="returnPartResponse">
+    <complexType>
+     <sequence>
+      <element name="returnPartReturn" type="tns5:ReturnResponseData"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="partSearch">
+    <complexType>
+     <sequence>
+      <element name="partSearchRequest" type="tns6:PartSearchRequest"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="partSearchResponse">
+    <complexType>
+     <sequence>
+      <element name="partSearchReturn" type="tns6:PartSearchResponse"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_tns6_AvailableLocation">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns6:AvailableLocation"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_tns6_PartData">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns6:PartData"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://cancel" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://OrderStatus"/>
+   <import namespace="http://returnpart"/>
+   <import namespace="http://invoice"/>
+   <import namespace="http://search"/>
+   <import namespace="http://DefaultNamespace"/>
+   <import namespace="http://create"/>
+   <complexType name="PartData">
+    <sequence>
+     <element name="cancelQuantity" nillable="true" type="xsd:string"/>
+     <element name="lineNumber" nillable="true" type="xsd:string"/>
+     <element name="partId" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="PartList">
+    <sequence>
+     <element name="partData" nillable="true" type="tns1:PartData"/>
+    </sequence>
+   </complexType>
+   <complexType name="CancelOrder">
+    <sequence>
+     <element name="orderConfirmationNumber" nillable="true" type="xsd:string"/>
+     <element name="orderNumber" nillable="true" type="xsd:string"/>
+     <element name="partList" nillable="true" type="tns1:PartList"/>
+    </sequence>
+   </complexType>
+   <complexType name="CancelResponse">
+    <sequence>
+     <element name="errorCode" nillable="true" type="xsd:string"/>
+     <element name="errorMessage" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://invoice" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://OrderStatus"/>
+   <import namespace="http://cancel"/>
+   <import namespace="http://returnpart"/>
+   <import namespace="http://search"/>
+   <import namespace="http://DefaultNamespace"/>
+   <import namespace="http://create"/>
+   <complexType name="InvoiceRequest">
+    <sequence>
+     <element name="invoiceNumber" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="PartData">
+    <sequence>
+     <element name="backOrderQuantity" nillable="true" type="xsd:string"/>
+     <element name="extendedAmount" nillable="true" type="xsd:string"/>
+     <element name="mfgCode" nillable="true" type="xsd:string"/>
+     <element name="mfgName" nillable="true" type="xsd:string"/>
+     <element name="orderQuantity" nillable="true" type="xsd:string"/>
+     <element name="partDescription" nillable="true" type="xsd:string"/>
+     <element name="partId" nillable="true" type="xsd:string"/>
+     <element name="partNumber" nillable="true" type="xsd:string"/>
+     <element name="serialNumber" nillable="true" type="xsd:string"/>
+     <element name="shipQuantity" nillable="true" type="xsd:string"/>
+     <element name="unitCoreCharge" nillable="true" type="xsd:string"/>
+     <element name="unitPrice" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="PartList">
+    <sequence>
+     <element name="partData" nillable="true" type="impl:ArrayOf_tns2_PartData"/>
+    </sequence>
+   </complexType>
+   <complexType name="InvoiceResponse">
+    <sequence>
+     <element name="freightAmount" nillable="true" type="xsd:string"/>
+     <element name="inboundTracking" nillable="true" type="xsd:string"/>
+     <element name="invoiceDate" nillable="true" type="xsd:string"/>
+     <element name="invoiceNumber" nillable="true" type="xsd:string"/>
+     <element name="orderConfirmationNumber" nillable="true" type="xsd:string"/>
+     <element name="orderDate" nillable="true" type="xsd:string"/>
+     <element name="orderNumber" nillable="true" type="xsd:string"/>
+     <element name="outboundShipingMethod" nillable="true" type="xsd:string"/>
+     <element name="outboundTracking" nillable="true" type="xsd:string"/>
+     <element name="partList" nillable="true" type="tns2:PartList"/>
+     <element name="taxAmount" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://create" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://OrderStatus"/>
+   <import namespace="http://cancel"/>
+   <import namespace="http://returnpart"/>
+   <import namespace="http://invoice"/>
+   <import namespace="http://search"/>
+   <import namespace="http://DefaultNamespace"/>
+   <complexType name="PartData">
+    <sequence>
+     <element name="locationId" nillable="true" type="xsd:string"/>
+     <element name="mfgCode" nillable="true" type="xsd:string"/>
+     <element name="orderQuantity" nillable="true" type="xsd:string"/>
+     <element name="partID" nillable="true" type="xsd:string"/>
+     <element name="partNumber" nillable="true" type="xsd:string"/>
+     <element name="partPrice" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="PartList">
+    <sequence>
+     <element name="partData" nillable="true" type="impl:ArrayOf_tns3_PartData"/>
+    </sequence>
+   </complexType>
+   <complexType name="PlaceOrder">
+    <sequence>
+     <element name="emailAddress" nillable="true" type="xsd:string"/>
+     <element name="orderNumber" nillable="true" type="xsd:string"/>
+     <element name="partList" nillable="true" type="tns3:PartList"/>
+     <element name="shipToAddress1" nillable="true" type="xsd:string"/>
+     <element name="shipToAddress2" nillable="true" type="xsd:string"/>
+     <element name="shipToCity" nillable="true" type="xsd:string"/>
+     <element name="shipToCountryCode" nillable="true" type="xsd:string"/>
+     <element name="shipToName" nillable="true" type="xsd:string"/>
+     <element name="shipToPostalCode" nillable="true" type="xsd:string"/>
+     <element name="shipToState" nillable="true" type="xsd:string"/>
+     <element name="shippingCarrier" nillable="true" type="xsd:string"/>
+     <element name="shippingCarrierAccount" nillable="true" type="xsd:string"/>
+     <element name="shippingMethod" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="PlaceOrderResponse">
+    <sequence>
+     <element name="errorCode" nillable="true" type="xsd:string"/>
+     <element name="errorMessage" nillable="true" type="xsd:string"/>
+     <element name="orderId" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://OrderStatus" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://cancel"/>
+   <import namespace="http://returnpart"/>
+   <import namespace="http://invoice"/>
+   <import namespace="http://search"/>
+   <import namespace="http://DefaultNamespace"/>
+   <import namespace="http://create"/>
+   <complexType name="OrderStatusRequest">
+    <sequence>
+     <element name="orderNumber" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="PartData">
+    <sequence>
+     <element name="backOrderedQuantity" nillable="true" type="xsd:string"/>
+     <element name="estimatedShipDate" nillable="true" type="xsd:string"/>
+     <element name="inboundTrackingNumber" nillable="true" type="xsd:string"/>
+     <element name="invoiceDate" nillable="true" type="xsd:string"/>
+     <element name="invoiceNumber" nillable="true" type="xsd:string"/>
+     <element name="itemType" nillable="true" type="xsd:string"/>
+     <element name="lineNumber" nillable="true" type="xsd:string"/>
+     <element name="openCore" nillable="true" type="xsd:string"/>
+     <element name="openFlag" nillable="true" type="xsd:string"/>
+     <element name="orderConfirmationNumber" nillable="true" type="xsd:string"/>
+     <element name="orderNumber" nillable="true" type="xsd:string"/>
+     <element name="orderQuantity" nillable="true" type="xsd:string"/>
+     <element name="outboundTrackingNumber" nillable="true" type="xsd:string"/>
+     <element name="partId" nillable="true" type="xsd:string"/>
+     <element name="partNumber" nillable="true" type="xsd:string"/>
+     <element name="serialNumber" nillable="true" type="xsd:string"/>
+     <element name="shippedQuantity" nillable="true" type="xsd:string"/>
+     <element name="status" nillable="true" type="xsd:string"/>
+     <element name="unitCoreCharge" nillable="true" type="xsd:string"/>
+     <element name="unitPrice" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="PartList">
+    <sequence>
+     <element name="partData" nillable="true" type="impl:ArrayOf_tns4_PartData"/>
+    </sequence>
+   </complexType>
+   <complexType name="OpenItems">
+    <sequence>
+     <element name="partList" nillable="true" type="tns4:PartList"/>
+    </sequence>
+   </complexType>
+   <complexType name="OrderStatusResponse">
+    <sequence>
+     <element name="openItems" nillable="true" type="tns4:OpenItems"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://returnpart" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://OrderStatus"/>
+   <import namespace="http://cancel"/>
+   <import namespace="http://invoice"/>
+   <import namespace="http://search"/>
+   <import namespace="http://DefaultNamespace"/>
+   <import namespace="http://create"/>
+   <complexType name="PartData">
+    <sequence>
+     <element name="lineNumber" nillable="true" type="xsd:string"/>
+     <element name="modelNumber" nillable="true" type="xsd:string"/>
+     <element name="partId" nillable="true" type="xsd:string"/>
+     <element name="returnQuantity" nillable="true" type="xsd:string"/>
+     <element name="returnReasonCode" nillable="true" type="xsd:string"/>
+     <element name="returnTypeCode" nillable="true" type="xsd:string"/>
+     <element name="serialNumber" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="PartList">
+    <sequence>
+     <element name="partData" nillable="true" type="tns5:PartData"/>
+    </sequence>
+   </complexType>
+   <complexType name="ReturnRequest">
+    <sequence>
+     <element name="invoiceNumber" nillable="true" type="xsd:string"/>
+     <element name="partList" nillable="true" type="tns5:PartList"/>
+     <element name="requestReturnLabel" nillable="true" type="xsd:string"/>
+     <element name="returnRequestNumber" nillable="true" type="xsd:string"/>
+     <element name="returnTrackingNumber" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ReturnResponse">
+    <sequence>
+     <element name="errorMessage" nillable="true" type="xsd:string"/>
+     <element name="returnAddess2" nillable="true" type="xsd:string"/>
+     <element name="returnAddress1" nillable="true" type="xsd:string"/>
+     <element name="returnCity" nillable="true" type="xsd:string"/>
+     <element name="returnCompany" nillable="true" type="xsd:string"/>
+     <element name="returnCountry" nillable="true" type="xsd:string"/>
+     <element name="returnLabelImage" nillable="true" type="xsd:string"/>
+     <element name="returnLabelLink" nillable="true" type="xsd:string"/>
+     <element name="returnPostalCode" nillable="true" type="xsd:string"/>
+     <element name="returnRequestNumber" nillable="true" type="xsd:string"/>
+     <element name="returnState" nillable="true" type="xsd:string"/>
+     <element name="rmaNumber" nillable="true" type="xsd:string"/>
+     <element name="status" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="ReturnResponseData">
+    <sequence>
+     <element name="data" nillable="true" type="tns5:ReturnResponse"/>
+     <element name="error" nillable="true" type="xsd:string"/>
+     <element name="message" nillable="true" type="xsd:string"/>
+     <element name="status" nillable="true" type="xsd:string"/>
+     <element name="timestamp" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://search" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://OrderStatus"/>
+   <import namespace="http://cancel"/>
+   <import namespace="http://returnpart"/>
+   <import namespace="http://invoice"/>
+   <import namespace="http://DefaultNamespace"/>
+   <import namespace="http://create"/>
+   <complexType name="PartSearchRequest">
+    <sequence>
+     <element name="customerAccount" nillable="true" type="xsd:string"/>
+     <element name="partNumber" nillable="true" type="xsd:string"/>
+     <element name="password" nillable="true" type="xsd:string"/>
+     <element name="quantity" nillable="true" type="xsd:string"/>
+     <element name="user" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="AvailableLocation">
+    <sequence>
+     <element name="availableQuantity" nillable="true" type="xsd:string"/>
+     <element name="countryCode" nillable="true" type="xsd:string"/>
+     <element name="locationId" nillable="true" type="xsd:string"/>
+     <element name="locationName" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="PartData">
+    <sequence>
+     <element name="availableLocation" nillable="true" type="impl:ArrayOf_tns6_AvailableLocation"/>
+     <element name="corePrice" nillable="true" type="xsd:string"/>
+     <element name="mfgCode" nillable="true" type="xsd:string"/>
+     <element name="mfgName" nillable="true" type="xsd:string"/>
+     <element name="notes" nillable="true" type="xsd:string"/>
+     <element name="partDescription" nillable="true" type="xsd:string"/>
+     <element name="partId" nillable="true" type="xsd:string"/>
+     <element name="partPrice" nillable="true" type="xsd:string"/>
+     <element name="partType" nillable="true" type="xsd:string"/>
+     <element name="quantityOnHand" nillable="true" type="xsd:string"/>
+     <element name="retailPrice" nillable="true" type="xsd:string"/>
+     <element name="totalPrice" nillable="true" type="xsd:string"/>
+     <element name="totalShipDate" nillable="true" type="xsd:string"/>
+     <element name="weight" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <complexType name="PartList">
+    <sequence>
+     <element name="partData" nillable="true" type="impl:ArrayOf_tns6_PartData"/>
+    </sequence>
+   </complexType>
+   <complexType name="PartSearchResponse">
+    <sequence>
+     <element name="data" nillable="true" type="tns6:PartList"/>
+     <element name="error" nillable="true" type="xsd:string"/>
+     <element name="extendedMessage" nillable="true" type="xsd:string"/>
+     <element name="message" nillable="true" type="xsd:string"/>
+     <element name="status" nillable="true" type="xsd:string"/>
+     <element name="timestamp" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="cancelOrderRequest">
+
+      <wsdl:part element="impl:cancelOrder" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createOrderResponse">
+
+      <wsdl:part element="impl:createOrderResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="partSearchRequest">
+
+      <wsdl:part element="impl:partSearch" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="cancelOrderResponse">
+
+      <wsdl:part element="impl:cancelOrderResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="returnPartRequest">
+
+      <wsdl:part element="impl:returnPart" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="invoiceDetailsRequest">
+
+      <wsdl:part element="impl:invoiceDetails" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="orderStatusRequest">
+
+      <wsdl:part element="impl:orderStatus" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="createOrderRequest">
+
+      <wsdl:part element="impl:createOrder" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="orderStatusResponse">
+
+      <wsdl:part element="impl:orderStatusResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="returnPartResponse">
+
+      <wsdl:part element="impl:returnPartResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="partSearchResponse">
+
+      <wsdl:part element="impl:partSearchResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="invoiceDetailsResponse">
+
+      <wsdl:part element="impl:invoiceDetailsResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="ServiceBencePartProgram">
+
+      <wsdl:operation name="cancelOrder">
+
+         <wsdl:input message="impl:cancelOrderRequest" name="cancelOrderRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:cancelOrderResponse" name="cancelOrderResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="invoiceDetails">
+
+         <wsdl:input message="impl:invoiceDetailsRequest" name="invoiceDetailsRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:invoiceDetailsResponse" name="invoiceDetailsResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createOrder">
+
+         <wsdl:input message="impl:createOrderRequest" name="createOrderRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:createOrderResponse" name="createOrderResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="orderStatus">
+
+         <wsdl:input message="impl:orderStatusRequest" name="orderStatusRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:orderStatusResponse" name="orderStatusResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="returnPart">
+
+         <wsdl:input message="impl:returnPartRequest" name="returnPartRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:returnPartResponse" name="returnPartResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="partSearch">
+
+         <wsdl:input message="impl:partSearchRequest" name="partSearchRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:partSearchResponse" name="partSearchResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="ServiceBencePartProgramSoapBinding" type="impl:ServiceBencePartProgram">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="cancelOrder">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="cancelOrderRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="cancelOrderResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="invoiceDetails">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="invoiceDetailsRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="invoiceDetailsResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="createOrder">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="createOrderRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="createOrderResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="orderStatus">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="orderStatusRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="orderStatusResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="returnPart">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="returnPartRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="returnPartResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="partSearch">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="partSearchRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="partSearchResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="ServiceBencePartProgramService">
+
+      <wsdl:port binding="impl:ServiceBencePartProgramSoapBinding" name="ServiceBencePartProgram">
+
+         <wsdlsoap:address location="http://localhost:8099/ServiceBenchService/services/ServiceBencePartProgram"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

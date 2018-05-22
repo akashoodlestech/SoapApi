@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from ServiceBencePartProgramService WSDL service -->
+
+  <service name="ServiceBencePartProgram" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://DefaultNamespace"/>
+      <parameter name="wsdlServiceElement" value="ServiceBencePartProgramService"/>
+      <parameter name="schemaQualified" value="http://create,http://DefaultNamespace,http://search,http://invoice,http://returnpart,http://cancel,http://OrderStatus"/>
+      <parameter name="wsdlServicePort" value="ServiceBencePartProgram"/>
+      <parameter name="className" value="ServiceBencePartProgram"/>
+      <parameter name="wsdlPortType" value="ServiceBencePartProgram"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://DefaultNamespace" xmlns:retNS="http://DefaultNamespace" xmlns:rtns="http://cancel" name="cancelOrder" qname="operNS:cancelOrder" returnQName="retNS:cancelOrderReturn" returnType="rtns:CancelResponse" soapAction="">
+        <parameter xmlns:pns="http://DefaultNamespace" xmlns:tns="http://cancel" qname="pns:cancelOrder" type="tns:CancelOrder"/>
+      </operation>
+      <operation xmlns:operNS="http://DefaultNamespace" xmlns:retNS="http://DefaultNamespace" xmlns:rtns="http://invoice" name="invoiceDetails" qname="operNS:invoiceDetails" returnQName="retNS:invoiceDetailsReturn" returnType="rtns:InvoiceResponse" soapAction="">
+        <parameter xmlns:pns="http://DefaultNamespace" xmlns:tns="http://invoice" qname="pns:invoiceRequest" type="tns:InvoiceRequest"/>
+      </operation>
+      <operation xmlns:operNS="http://DefaultNamespace" xmlns:retNS="http://DefaultNamespace" xmlns:rtns="http://create" name="createOrder" qname="operNS:createOrder" returnQName="retNS:createOrderReturn" returnType="rtns:PlaceOrderResponse" soapAction="">
+        <parameter xmlns:pns="http://DefaultNamespace" xmlns:tns="http://create" qname="pns:placeOrder" type="tns:PlaceOrder"/>
+      </operation>
+      <operation xmlns:operNS="http://DefaultNamespace" xmlns:retNS="http://DefaultNamespace" xmlns:rtns="http://OrderStatus" name="orderStatus" qname="operNS:orderStatus" returnQName="retNS:orderStatusReturn" returnType="rtns:OrderStatusResponse" soapAction="">
+        <parameter xmlns:pns="http://DefaultNamespace" xmlns:tns="http://OrderStatus" qname="pns:orderStatusRequest" type="tns:OrderStatusRequest"/>
+      </operation>
+      <operation xmlns:operNS="http://DefaultNamespace" xmlns:retNS="http://DefaultNamespace" xmlns:rtns="http://returnpart" name="returnPart" qname="operNS:returnPart" returnQName="retNS:returnPartReturn" returnType="rtns:ReturnResponseData" soapAction="">
+        <parameter xmlns:pns="http://DefaultNamespace" xmlns:tns="http://returnpart" qname="pns:returnRequest" type="tns:ReturnRequest"/>
+      </operation>
+      <operation xmlns:operNS="http://DefaultNamespace" xmlns:retNS="http://DefaultNamespace" xmlns:rtns="http://search" name="partSearch" qname="operNS:partSearch" returnQName="retNS:partSearchReturn" returnType="rtns:PartSearchResponse" soapAction="">
+        <parameter xmlns:pns="http://DefaultNamespace" xmlns:tns="http://search" qname="pns:partSearchRequest" type="tns:PartSearchRequest"/>
+      </operation>
+      <parameter name="allowedMethods" value="createOrder returnPart cancelOrder orderStatus invoiceDetails partSearch"/>
+
+      <typeMapping xmlns:ns="http://cancel" qname="ns:CancelResponse" type="java:cancel.CancelResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://create" qname="ns:PartData" type="java:create.PartData" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://DefaultNamespace" xmlns:cmp-ns="http://OrderStatus" qname="ns:ArrayOf_tns4_PartData" type="java:OrderStatus.PartData[]" innerType="cmp-ns:PartData" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://create" qname="ns:PartList" type="java:create.PartList" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://search" qname="ns:PartSearchResponse" type="java:search.PartSearchResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://cancel" qname="ns:CancelOrder" type="java:cancel.CancelOrder" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://search" qname="ns:AvailableLocation" type="java:search.AvailableLocation" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://OrderStatus" qname="ns:OrderStatusResponse" type="java:OrderStatus.OrderStatusResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://search" qname="ns:PartSearchRequest" type="java:search.PartSearchRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://OrderStatus" qname="ns:OpenItems" type="java:OrderStatus.OpenItems" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://returnpart" qname="ns:ReturnRequest" type="java:returnpart.ReturnRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://DefaultNamespace" xmlns:cmp-ns="http://search" qname="ns:ArrayOf_tns6_AvailableLocation" type="java:search.AvailableLocation[]" innerType="cmp-ns:AvailableLocation" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://DefaultNamespace" xmlns:cmp-ns="http://search" qname="ns:ArrayOf_tns6_PartData" type="java:search.PartData[]" innerType="cmp-ns:PartData" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://create" qname="ns:PlaceOrderResponse" type="java:create.PlaceOrderResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://create" qname="ns:PlaceOrder" type="java:create.PlaceOrder" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://invoice" qname="ns:PartData" type="java:invoice.PartData" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://invoice" qname="ns:PartList" type="java:invoice.PartList" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://OrderStatus" qname="ns:OrderStatusRequest" type="java:OrderStatus.OrderStatusRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://OrderStatus" qname="ns:PartData" type="java:OrderStatus.PartData" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://OrderStatus" qname="ns:PartList" type="java:OrderStatus.PartList" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://search" qname="ns:PartData" type="java:search.PartData" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://search" qname="ns:PartList" type="java:search.PartList" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://returnpart" qname="ns:PartData" type="java:returnpart.PartData" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://returnpart" qname="ns:PartList" type="java:returnpart.PartList" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://DefaultNamespace" xmlns:cmp-ns="http://invoice" qname="ns:ArrayOf_tns2_PartData" type="java:invoice.PartData[]" innerType="cmp-ns:PartData" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://invoice" qname="ns:InvoiceResponse" type="java:invoice.InvoiceResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://DefaultNamespace" xmlns:cmp-ns="http://create" qname="ns:ArrayOf_tns3_PartData" type="java:create.PartData[]" innerType="cmp-ns:PartData" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://cancel" qname="ns:PartData" type="java:cancel.PartData" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://cancel" qname="ns:PartList" type="java:cancel.PartList" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://returnpart" qname="ns:ReturnResponseData" type="java:returnpart.ReturnResponseData" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://returnpart" qname="ns:ReturnResponse" type="java:returnpart.ReturnResponse" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://invoice" qname="ns:InvoiceRequest" type="java:invoice.InvoiceRequest" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
